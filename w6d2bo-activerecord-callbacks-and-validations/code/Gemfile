@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+
+gem 'pg'
+gem 'activerecord'
+gem 'activesupport'
+
+# For a nicer console
+gem 'pry'
+gem 'interactive_editor'
+gem 'awesome_print'
+
+# Faker generates fake test data
+gem 'faker'
