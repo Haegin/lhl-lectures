@@ -1,0 +1,19 @@
+{
+  "name": "w1d5",
+  "version": "1.0.0",
+  "description": "LHL - Automated testing example",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "author": "Fabio Neves",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "request": "^2.79.0"
+  }
+}

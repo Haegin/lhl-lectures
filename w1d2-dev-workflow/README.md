@@ -1,7 +1,26 @@
-## How do I dev?
+# How do I dev?
 
 Today we've discussed how to break a problem into its constituent parts and use the tools at our disposal to solve it.
+
 This involved using the Node repl, using `console.log` statements, googling a lot and using [`node debug`](https://nodejs.org/api/debugger.html) to run our small application step by step.
 
-We've also played with [PythonTutor](http://pythontutor.com) to visualize how our code runs. Despite the name, it can analyze several languages including Javascript.
-<a href="http://pythontutor.com/visualize.html#code=function%20convert_values(values%29%20%7B%0A%20%20var%20numbers%20%3D%20%5B%5D%3B%0A%0A%20%20for(var%20value%20of%20values%29%20%7B%0A%20%20%20%20var%20number%20%3D%20Number(value%29%0A%20%20%20%20if%20(!isNaN(number%29%29%20%7B%0A%20%20%20%20%20%20numbers.push(number%29%0A%20%20%20%20%7D%0A%20%20%7D%0A%20%20return%20numbers%3B%0A%7D%0A%0A%0Afunction%20sum(values%29%20%7B%0A%20%20var%20total%20%3D%200%3B%0A%20%20var%20numbers%20%3D%20convert_values(values%29%3B%0A%0A%20%20for(var%20number%20of%20numbers%29%20%7B%0A%20%20%20%20total%20%2B%3D%20number%3B%0A%20%20%7D%0A%0A%20%20return%20total%3B%0A%7D%0A%0A%0Avar%20args%20%3D%20%5B5,%20%22banana%22,%205,%20%22apple%22,%2010%5D%3B%0Aconsole.log(%60The%20sum%20of%20the%20numbers%20is%20%24%7Bsum(args%29%7D.%60%29&cumulative=false&curInstr=0&heapPrimitives=false&mode=display&origin=opt-frontend.js&py=js&rawInputLstJSON=%5B%5D&textReferences=false">Here's a link to the code discussed in class inside PythonTutor.</a>
+## Googling protips
+
+The best reference for Javascript at this time is [Mozilla Developer Network](https://developer.mozilla.org/en-US/). Usually searching for `mdn something` will get you straight to what you're looking for.
+
+If you want to know about what you can do with a particular kind of variable - `Array` or `String`, for example - google `mdn array` and look on the left-hand side for definitions of `Array.prototype.<function here>`.
+
+Think of `prototype` as master definition of a particular type. Everything attached to `prototype` is available to all things based on it. In other words, `Array.prototype.push()` means that you can use `push()` with **all arrays**.
+
+(If you have previous experience with object oriented programming: `prototype` is very similar to `class` - but different!.)
+
+**Example:** Let's say I want to convert a string to uppercase, so I google `mdn string prototype uppercase`. The first result was [right on the money](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase)!
+
+## Code
+
+The code discussed in class can be found in the [`/code`](code) folder. You can also see code from previous iterations of this lecture inside [`/previous`](previous).
+
+## Bonus: PythonTutor
+
+[PythonTutor](http://pythontutor.com) is a nice tool to visualize how our code runs. Despite the name, it can analyze several languages including Javascript.
+[Here's a link to some code similar to what we've discussed in class inside PythonTutor.](https://goo.gl/CF3wTT)

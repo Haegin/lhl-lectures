@@ -1,18 +1,33 @@
-var counter = 10;
+// Example 4: context is not scope!
+// Functions have access to the object that calls the function, which is
+// accessible through the `this` keyword.
+// Simple function calls will always have this = global, while functions
+// called within objects will have this = the caller object.
 
-function increaseCounter() {
-  counter++;
+// Notice how we're declaring this function. In essence, this is the same as
+// function description(), but it makes clear that we're *always* putting
+// a piece of code inside a variable.
+var description = function() {
+  console.log(this.name + " is an agent with licence " + this.licence + ", codename: " + this.codename);
 }
 
-for (var i = 0; i < 100; i += 10) {
-  increaseCounter();
+
+var james = {
+  name: "James Bond",
+  licence: "To kill",
+  codename: "007",
+  describe: description // Notice we're passing the function as a value,
+}                       // NOT calling it! Functions *only* run when you add
+                        // parentheses.
+
+var clark = {
+  name: "Clark Kent",
+  licence: "To fly",
+  codename: "Superman",
+  describe: description
 }
 
-function report() {
-  var counter;
 
-  console.log("The final result is: ", counter);
-}
-
-console.log(counter);
-report();
+james.describe(); // this = james
+clark.describe(); // this = clark
+description(); // this = global, so everything will be `undefined`

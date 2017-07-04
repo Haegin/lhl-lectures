@@ -2,8 +2,8 @@ const express = require('express');
 const SocketServer = require('ws').Server;
 var uuid = require('node-uuid');
 
-// Set the port to 4000
-const PORT = 4000;
+// Set the port to 8080
+const PORT = 8080;
 
 // Create a new express server
 const app = express()
@@ -41,19 +41,23 @@ wss.broadcast = function(data) {
 function handleMessage(message_data) {
   // Receive message, parse, then add unique id so React behaves correctly
   console.log(`Received: ${message_data}`)
-  var message = JSON.parse(message_data);
+  let message = JSON.parse(message_data);
   message.id = uuid.v4();
-  message.type = "message";
+  message.type = 'message';
 
-  // Detect commands - anything starting with a slash.
-  // We add some additional data to be used by the client in this case.
-  var matchCommand = message.content.match(/^\/.* ?/);
-  if (matchCommand) {
-    var command = matchCommand[0].split(' ')[0];               // Everything before the space is the command
-    var argument = matchCommand[0].replace(command, '').trim(); // and everything else is the argument.
+  /*
+    If the message starts with a '/'
+    - Extract the command, i.e. what comes right after the '/'
+      - Use this regex ^\/(\w+)\s
+    - Send the message back to the client with a different type
+      - Regular message: type = 'message'
+      - Command message: type = 'command'
+  */
+  let match = message.content.match(/^\/(\w+)\s/);
+  if (match) {
+    let command = match[1];
     message.type = "command";
-    message.command = command.trim().replace(/^\//, '').toLowerCase(); // Normalize command
-    message.argument = argument;
+    message.command = command;
   }
 
   // Now we stringify the message and send it back to all clients via broadcast

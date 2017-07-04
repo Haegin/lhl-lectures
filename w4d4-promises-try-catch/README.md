@@ -22,6 +22,8 @@ db.query(query, [artistName, albumName], (err, result) => {
 }
 ```
 
+This is ok, but we can do better!
+
 ## Promises to the rescue
 
 Promises provide a way to make async code less painful. Many async-heavy
@@ -37,10 +39,18 @@ The main idea goes like this:
   * Think of it as an IOU for the function's return value
 * When things go well: `.then((something) => {something()})`
   * `.then` is called with the **sucessful** return value of the previous step
-* You can add more `.then`s here, as many as you want
+* You can add more `.then`s here, as long as you return another promise
+  * You can make immediately resolved/rejected promises with `Promise.resolve("value")`
+  * So instead of `return "value"` you'll use `return Promise.resolve("value")`
 * When errors happen: `.catch((oops) => console.log("Things went boom, yo"))`
   * The chain will be halted and `.catch` will be called immediately with the error as first argument
+
+[This site provides an amazing visualization of how promises work](http://bevacqua.github.io/promisees/), including examples on how to use `Promise.all()` to run several promises in parallel and use their results.
 
 See [`promises.js`](code/promises.js) for an introductory example and
 [`p-request.js`](code/p-request.js) for a practical use of promises being used
 with the `request` module.
+
+For a more complete example, check out [`getheadtags.js`](code/getheadtags.js).
+It uses promises to break each one of the process' steps into a
+promise-compatible function, the calls everything step by step at the end.

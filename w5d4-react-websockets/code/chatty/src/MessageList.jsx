@@ -7,14 +7,7 @@ const MessageList = React.createClass({
     return (
       <div id="message-list">
         {messages.map(function(message){
-          return (
-            <Message
-              key={message.id}
-              username={message.username}
-              content={message.content}
-              type={message.type}
-            />
-          )
+          return <Message key={message.id} message={message} />
         })}
       </div>
     );

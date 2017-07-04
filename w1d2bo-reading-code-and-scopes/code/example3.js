@@ -1,13 +1,21 @@
-function add(x) {
-  var z = 10;
-  return function(y) {
-    return x + y + z;
-  }
+// Example 3: Global variables are available inside functions
+// but local variables are only visible within the function.
+
+var counter = 10;
+
+function increaseCounter() {
+  counter++;
 }
 
-var first = add(5);
+for (var i = 0; i < 100; i += 10) {
+  increaseCounter();
+}
 
-var second = first(5);
+function report() {
+  var counter; // From this point onwards, THIS is the counter the function has access to.
 
-console.log(second);
+  console.log("The final result is: ", counter); // counter = undefined!
+}
 
+console.log(counter);
+report();
