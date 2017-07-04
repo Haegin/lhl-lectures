@@ -5,9 +5,6 @@ require_relative 'lib/user'
 require_relative 'lib/post'
 require_relative 'lib/comment'
 
-# Output messages from AR to STDOUT
-ActiveRecord::Base.logger = Logger.new(STDOUT)
-
 puts "Establishing connection to database ..."
 ActiveRecord::Base.establish_connection(
   adapter: 'postgresql',
@@ -53,16 +50,13 @@ ActiveRecord::Schema.define do
   end
 end
 
-puts "Setup DONE"
-
-
+puts "DB Setup DONE"
 
 # Create example data
 def populate
   require 'faker'
 
   3.times do
-
     User.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
@@ -79,7 +73,7 @@ def populate
       user_id: users.sample.id
     )
 
-    5.times do
+    3.times do
       Comment.create!(
         comment: Faker::Lorem.paragraph,
         post_id: post.id,
@@ -92,6 +86,10 @@ end
 populate
 
 user = Post.all.sample.user
-commentor = user.posts.find { |p| p.comments.count > 0 }.comments.first.user
+post = user.posts.find { |p| p.comments.count > 0 }
+comment = post.comments.first
+commentor = comment.user
+
+unpublished_post = Post.where(published: false).sample
 
 binding.pry
