@@ -18,38 +18,20 @@ The documentation on ActiveRecord (the gem) is extensive and excellent. Be sure 
 
 ## Topics:
 
-* Active Record as an ORM
-    - Setting up models
-        + `CREATE TABLE things...`
-        + `class Thing < ActiveRecord::Base`
-* CRUD Operations
-    - CREATE
-        + `instance = Model.new`
-        + `instance.save`
-        + `Model.create`
-    - READ
-        + `Model.find`
-        + `Model.find_by`
-        + `Model.where`
-        + `Model.first` / `Model.last`
-        + `find` vs `find_by` vs `where`
-    - UPDATE
-        + change object + `save`
-        + `instance.update`
-        + `Model.where(...).update_all(...)`
-    - DELETE
-        + `instance.destroy`
-        + `Model.where(...).destroy_all`
-    - Quick note on bangs - `save` vs. `save!`
-        + Normal methods - `save`, `create` etc. - fail silently
-        + "Banged" methods - `save!`, `create!` etc. - raise exceptions on failure
-* Method Chaining
-    - `Model.where(...).where.not(...).order(...)...`
-* Brief intro to Validations
-    - `validates :field, <conditions>`
-* Associations
-    - `has_many`
-    - `belongs_to`
+* Introducing Comments
+* More Associations
+  - `Post.joins(comments: :user).where(users: {id: user.id})`
+  - `has_many :commented_posts, through: :comments, source: :post`
+* Callbacks
+  - Adding a published_at timestamp automatically when a model is saved.
+* Validations
+  - simple private method validations
+  - custom validators
+* Scopes
+  - Easier to do common queries
+  - `Post.published`
+  - `Post.published_before(date)`
+  - Work with chaining normally.
 
 ## Code
 
